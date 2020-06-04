@@ -17,10 +17,39 @@
         }
     </script>
 
-    <form action="http://localhost:8765" method="post">
+    <!-- Referenced https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch -->
+    <script>
+        function upload() {
+            document.getElementById("form1").addEventListener("click", function(event){
+                event.preventDefault()
+            });
+
+            const formData = new FormData();
+            const fileField = document.querySelector('input[type="file"]');
+            formData.append('image', fileField.files[0]);
+
+            fetch('http://localhost:8765', {
+                method: 'PUT',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(classification => document.getElementById("p1").textContent = classification);
+        }
+    </script>
+
+    <form id="form1" action="javascript:;" onsubmit="upload(this)"></form>
         <label for="img">Select image:</label>
         <input type="file" accept="image/*" onchange="showImg()">
         <input type="submit">
     </form>
+
+    <br>
+    <br>
+
     <img src="" height="200" alt="Image preview...">
+
+    <br>
+    <br>
+
+    <p id="p1"> </p>
 </html>
