@@ -19,17 +19,15 @@
 
     <!-- Referenced https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch -->
     <script>
-        function upload() {
-            document.getElementById("form1").addEventListener("click", function(event){
-                event.preventDefault()
-            });
+        document.getElementById("form1").addEventListener("submit", function(event){
+            event.preventDefault()
+        });
 
-            const formData = new FormData();
-            const fileField = document.querySelector('input[type="file"]');
-            formData.append('image', fileField.files[0]);
+        function upload() {
+            const formData = new FormData(document.getElementById("form1"));
 
             fetch('http://localhost:8765', {
-                method: 'PUT',
+                method: 'POST',
                 body: formData
             })
             .then(response => response.text())
@@ -39,7 +37,7 @@
 
     <form id="form1" action="javascript:;" onsubmit="upload(this)"></form>
         <label for="img">Select image:</label>
-        <input type="file" accept="image/*" onchange="showImg()">
+        <input type="file" id="img" accept="image/*" onchange="showImg()">
         <input type="submit">
     </form>
 
