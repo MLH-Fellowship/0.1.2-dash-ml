@@ -11,7 +11,7 @@ export default function () {
     const [progress, setLastProgress] = useState({})
 
     const openSocket = () => {
-        const ws = new WebSocket("wss://echo.websocket.org");
+        const ws = new WebSocket("ws://localhost:5000");
         ws.onclose = () => {
             setConnected(false);
             setTimeout(openSocket, 1000);

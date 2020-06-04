@@ -7,8 +7,6 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Dense, Dropout, Flatten
 from keras.models import Sequential
 
-import matplotlib.pyplot as plt
-
 
 def main():
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
@@ -53,8 +51,11 @@ def main():
 
     connected_dashboards = []
 
-    async def connect_dashboard(websocket, _):
+    async def connect_dashboard(websocket: websockets.WebSocketServerProtocol, _):
+        print("Connected to a dashboard")
         connected_dashboards.append(websocket)
+        while websocket.open:
+            pass
 
     start_server = websockets.serve(connect_dashboard, "localhost", 5000)
 
