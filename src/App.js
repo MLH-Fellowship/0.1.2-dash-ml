@@ -6,12 +6,12 @@ export default function () {
         image: "https://placehold.it/128x128"
     });
     const [lastResult, setLastResult] = useState({
-        outcome: [{label: "A", chance: "90%"}, {label: "B", chance: "80%"}]
+        outcome: ["A"]
     });
     const [progress, setLastProgress] = useState({})
 
     const openSocket = () => {
-        const ws = new WebSocket("ws://localhost:1012");
+        const ws = new WebSocket("ws://localhost:5012/ws");
         ws.onclose = () => {
             setConnected(false);
             setTimeout(openSocket, 1000);
@@ -43,19 +43,17 @@ export default function () {
         <>
             <div>
                 <h1>Dashboard ML</h1>
-                <p>{isConnectedToApiSocket ? "Connected" : "Connecting..."} to the server at port 5000</p>
+                <p>{isConnectedToApiSocket ? "Connected" : "Connecting..."} to the server at port 5012</p>
                 <img src={lastRequest.image} alt={""}/>
                 <table>
                     <thead>
                         <tr>
                             <th>Label</th>
-                            <th>Probability</th>
                         </tr>
                     </thead>
                     <tbody>
                         {lastResult.outcome.map((it, index) => <tr key={index}>
-                            <td>{it.label}</td>
-                            <td>{it.chance}</td>
+                            <td>{it}</td>
                         </tr>)}
                     </tbody>
                 </table>
