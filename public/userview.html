@@ -26,7 +26,7 @@
         function upload() {
             const formData = new FormData(document.getElementById("form1"));
 
-            fetch('http://localhost:8765', {
+            fetch('http://localhost:8765/predict', {
                 method: 'POST',
                 body: formData
             })
