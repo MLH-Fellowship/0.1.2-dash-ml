@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- Referenced https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL -->
+    <script>
+        function showImg() {
+            const preview = document.querySelector('img');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                // convert image file to base64 string
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+    <!-- Referenced https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch -->
+    <script>
+        document.getElementById("form1").addEventListener("submit", function(event){
+            event.preventDefault()
+        });
+
+        function upload() {
+            const formData = new FormData(document.getElementById("form1"));
+
+            fetch('http://localhost:8765', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(classification => document.getElementById("p1").textContent = classification);
+        }
+    </script>
+
+    <form id="form1" onsubmit="upload(this)">
+        <label for="img">Select image:</label>
+        <input type="file" id="img" accept="image/*" onchange="showImg()">
+        <input type="submit">
+    </form>
+
+    <br>
+    <br>
+
+    <img src="" height="200" alt="Image preview...">
+
+    <br>
+    <br>
+
+    <p id="p1"> </p>
+</html>
