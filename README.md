@@ -1,13 +1,21 @@
 ## DashML - a web-based machine learning dashboard
 
-At DashMl, we are building a machine learning dashboard benefits for both end users and the app developers.
- 
+At DashMl, we are building a machine learning dashboard that benefits both end-users and the app developers/domain experts. While users can upload an image and receive a classification result, app developers could utilize the insights presented on our dashboard to improve their models further.  
 
+## Features 
+* upload images and receive real-time prediction results 
+* visulize model results on dashboard by providing insights on actual/predict/probabilities  
+* present a heatmap by different classes (next step)
 
+## Use case 
+The current pandemic may boom the telehealth programs, and we see DashML could fit into this. For example, a user needs diagnosis for mild skin conditions but is not able to see a dermatologist, such as eczema, psoriasis, and rosacea, which requires domain expertise to distinguish. In this case, a user could upload an image of her/his skin condition to DashMl. Our model would provide the user with a real-time diagnosis through our image classifier model trained on this subject matter. On the other hand, the domain experts could use the DashML dashboard to understand the model result better through understanding the actual and predicted class of the image and the probabilities.  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Built with
+React, Keras, BentoMl
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
