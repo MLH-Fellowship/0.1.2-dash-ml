@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <title>MNIST</title>
+</head>
+<body>
+<div id="form-wrapper">
+    <h1>MNIST Classifier!</h1>
+    <form action="http://localhost:5012" enctype="multipart/form-data" method="post">
+        <label for="image">
+            <img id="preview" src="https://placehold.it/800x800" alt="Image to classify">
+            Click here to upload an image!
+        </label>
+        <input name="image" id="image" accept="image/*" type="file">
+        <input value="Upload and Classify!" type="submit">
+    </form>
+</div>
+<script>
+    const imgInput = document.getElementById("image");
+    imgInput.addEventListener("change", () => {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const preview = document.getElementById('preview');
+            preview.src = reader.result;
+        };
+        reader.readAsDataURL(imgInput.files[0]);
+    });
+</script>
+</body>
+</html>

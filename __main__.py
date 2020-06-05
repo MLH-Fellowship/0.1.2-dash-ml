@@ -59,6 +59,8 @@ if __name__ == '__main__':
     dashboards = []
 
 
+
+
     async def receive_dashboard(websocket, _):
         dashboards.append(websocket)
         (is_are, pluralized_dashboards) = dashboards_pluralize()
