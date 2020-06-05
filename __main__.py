@@ -1,14 +1,11 @@
-import asyncio
-
 import keras
-import websockets
 from keras.datasets import mnist
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Dense, Dropout, Flatten
 from keras.models import Sequential
 
 
-def main():
+def generate_model():
     (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
     X_train = X_train.reshape(60000, 28, 28, 1)
@@ -18,10 +15,6 @@ def main():
     X_test = X_test.astype('float32')
     X_train /= 255
     X_test /= 255
-
-    print('X_train shape:', X_train.shape)
-    print(X_train.shape[0], 'train samples')
-    print(X_test.shape[0], 'test samples')
 
     y_train = keras.utils.to_categorical(y_train, 10)
     y_test = keras.utils.to_categorical(y_test, 10)
@@ -41,28 +34,17 @@ def main():
                   metrics=['accuracy'])
 
     model.summary()
-
-    # model.fit(X_train, y_train, batch_size=128, verbose=0, epochs=5, validation_data=(X_test, y_test))
-    model.load_weights('mnist_model.h5')
-    model.save('mnist_model.h5')
-    score = model.evaluate(X_test, y_test, verbose=0)
-    print('Test score:', score[0])
-    print('Test accuracy:', score[1])
-
-    connected_dashboards = []
-
-    async def connect_dashboard(websocket: websockets.WebSocketServerProtocol, _):
-        print("Connected to a dashboard")
-        connected_dashboards.append(websocket)
-        while websocket.open:
-            pass
-
-    start_server = websockets.serve(connect_dashboard, "localhost", 5000)
-
-    asyncio.get_event_loop().run_until_complete(start_server)
-    print("Started a dashboard socket on port 5000")
-    asyncio.get_event_loop().run_forever()
+    model.fit(X_train, y_train, batch_size=128, verbose=0, epochs=5, validation_data=(X_test, y_test))
+    return model
 
 
 if __name__ == '__main__':
-    main()
+    mnist_model = None
+    try:
+        mnist_model = keras.models.load_model("mnist_model")
+        print("Using pre-existing model at mnist_model from ", mnist_model)
+    except OSError:
+        print("Could not find a pre-existing model at mnist_model, generating a new one")
+        mnist_model = generate_model()
+        mnist_model.save("mnist_model")
+    print(mnist_model.predict(mnist.load_data()[1][0][50].reshape(1, 28, 28, 1)).argmax())
