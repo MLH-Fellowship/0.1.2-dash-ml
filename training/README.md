@@ -1,0 +1,2 @@
+# Training
+This directory contains resources to retrain the model to be redeployed if needed. For only deploying, please refer to the readme that indicates to download te packaged `MNISTClassifier` service in `../bentoml`.
