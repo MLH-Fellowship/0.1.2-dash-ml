@@ -1,3 +1,10 @@
+## DashML - a web-based machine learning dashboard
+
+At DashMl, we are building a machine learning dashboard benefits for both end users and the app developers.
+ 
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
