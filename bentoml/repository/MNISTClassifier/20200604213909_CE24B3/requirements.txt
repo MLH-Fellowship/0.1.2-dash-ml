@@ -1,0 +1,4 @@
+tensorflow
+imageio
+bentoml==0.7.8
+numpy==1.18.1

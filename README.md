@@ -1,3 +1,24 @@
+# Training
+For initial training and creation of our `BentoService` for the MNIST Dataset, please refer to the README in `/training`
+
+# Serving the Model
+The model in this repositoy is located in `/bentoml/repository/MNISTClassifier`.
+
+1. Place the `MNISTClassifier` folder into your respective `bentoml` directory where your services are located.
+
+    - A sample path for Windows is:
+
+        - `C:\Users\Your_PC_Name\bentoml\repository\MNISTClassifier\some_arbitrary_version_number'`
+
+    - Inside the `MNISTClassifier` folder, you'll see version numbers of all the times you have built te service. 
+
+        - An example version number is: `20200604213909_CE24B3`
+
+2. After placing `MNISTClassifier` inside the aforementioned directory, the model can now be served in the terminal:
+
+    `bentoml serve MNISTClassifier:latest`
+    
+# Dashboard
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
